@@ -23,7 +23,8 @@ class User_model extends CI_Model {
 				'a.email',
 				'b.user_type',
 				'c.name AS branch',
-				'd.name AS position'
+				'd.name AS position',
+				'e.login'
 			);
 
 		$query = $this->db->select($fields)
@@ -31,6 +32,8 @@ class User_model extends CI_Model {
 				->join('roles_tbl AS b', 'a.role_id = b.id', 'INNER')
 				->join('branches_tbl AS c', 'a.branch_id = c.id', 'LEFT')
 				->join('positions_tbl AS d', 'a.position_id = d.id', 'LEFT')
+				->join('logs_tbl AS e', 'a.id = e.user_id', 'LEFT')
+				->order_by('e.id', 'DESC')
 				->where($config)
 				->get();
 
