@@ -31,7 +31,7 @@ class User extends CI_Controller
 
 		$data = array(
 				'title'     => $id ? 'Update Details' : 'Add Users',
-				'entity'    => $id ? $this->user_model->read($id) : '',	
+				'entity'    => $id ? $this->user_model->read($id) : '',
 				'roles'     => $this->user_model->fetch_roles(),
 				'branches'  => $this->branch_model->browse(),
 				'positions' => $this->position_model->browse()

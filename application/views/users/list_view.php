@@ -3,7 +3,7 @@
 	<!-- row -->
 	<div class="row">
 		<!-- col-md-6 -->
-		<div class="col-md-10">
+		<div class="col-md-12">
 			<!-- Box danger -->
 			<div class="box box-danger">
 				<!-- Content -->
@@ -25,6 +25,7 @@
 								<th>User type</th>
 								<th>Branch</th>
 								<th>Position</th>
+								<th>Email</th>
 								<th>Date Time</th>
 								<th>Edit</th>
 								<th>Delete</th>
@@ -42,6 +43,7 @@
 									<td><?php echo ucfirst($user->user_type); ?></td>
 									<td><?php echo $user->branch; ?></td>
 									<td><?php echo $user->position; ?></td>
+									<td><?php echo $user->email; ?></td>
 									<td><?php echo date('m/d/Y h:i A', strtotime($user->datetime)); ?></td>
 									<td>
 										<a href="<?php echo base_url('index.php/user/form/' . $user->id); ?>" data-toggle="modal" data-target=".bs-example-modal-sm">

@@ -20,6 +20,7 @@ class User_model extends CI_Model {
 				'a.username',
 				'a.fullname',
 				'a.emp_no',
+				'a.email',
 				'b.user_type',
 				'c.name AS branch',
 				'd.name AS position'
@@ -95,6 +96,7 @@ class User_model extends CI_Model {
 				'a.fullname',
 				'a.emp_no',
 				'a.datetime',
+				'a.email',
 				'b.user_type',
 				'c.name AS branch',
 				'd.name AS position'
