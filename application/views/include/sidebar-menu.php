@@ -31,11 +31,22 @@
 			
 			<?php $menu = $this->uri->uri_string(); ?>
 
-			<li class="<?php echo $menu == 'branch/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/branch/list_') ?>"><i class="fa fa-table"></i><span>Branches</span></a></li>
+			<li class="<?php echo $menu == 'branch/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/branch/list_') ?>"><i class="fa fa-share-alt" aria-hidden="true"></i><span>Branches</span></a></li>
 
-			<li class="<?php echo $menu == 'position/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/position/list_') ?>"><i class="fa fa-table"></i><span>Positions</span></a></li>
+			<li class="<?php echo $menu == 'position/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/position/list_') ?>"><i class="fa fa-sitemap" aria-hidden="true"></i><span>Positions</span></a></li>
 
-			<li class="<?php echo $menu == 'user/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/user/list_') ?>"><i class="fa fa-table"></i><span>Users</span></a></li>
+			<li class="<?php echo $menu == 'user/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/user/list_') ?>"><i class="fa fa-user" aria-hidden="true"></i><span>Users</span></a></li>
+
+			<li class="<?php echo $menu == 'user/logs' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/user/logs') ?>"><i class="fa fa-history" aria-hidden="true"></i><span>User's Log</span></a></li>
+
+			<li class="<?php echo $menu == 'category/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/category/list_') ?>"><i class="fa fa-tags" aria-hidden="true"></i><span>Categories</span></a></li>
+
+			<li class="<?php echo $menu == 'docs/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/docs/list_') ?>"><i class="fa fa-file" aria-hidden="true"></i><span>Documents</span></a></li>
+
+			<li class="<?php echo $menu == 'request/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/request/list_') ?>"><i class="fa fa-paper-plane" aria-hidden="true"></i><span>Requests</span></a></li>
+
+			<li class="<?php echo $menu == 'request/approved_list' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/request/approved_list') ?>"><i class="fa fa-check-circle" aria-hidden="true"></i><span>Approved Requests</span></a></li>
+
 
 		</ul><!-- /.sidebar-menu -->
 

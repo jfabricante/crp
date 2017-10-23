@@ -7,9 +7,14 @@ class Login extends CI_Controller {
 	{
 		parent::__construct();
 
+		date_default_timezone_set('Asia/Manila');
+
 		$helpers = array('form');
 
 		$this->load->helper($helpers);
+
+		// Load logs model
+		$this->load->model('logs_model');
 	}
 
 	public function index()
@@ -24,15 +29,18 @@ class Login extends CI_Controller {
 		if ($this->_validate_input() && is_array($user_data))
 		{
 
+			$config = array(
+					'user_id' => $user_data['id'],
+					'login'   => date('Y-m-d H:i:s')
+				);
+
+			$logs_id = $this->logs_model->store($config);
+
+			$user_data['logs_id'] = $logs_id;
+
 			$this->session->set_userdata($user_data);
 
 			redirect('/user/list_');
-			/*if($user_data['user_type'] == 'admin')
-			{
-				redirect(base_url('index.php/admin/rooms'));
-			}
-			
-			redirect(base_url('index.php/requestor/rooms'));*/
 		}
 
 		$data['message'] = '<span class="col-sm-12 alert alert-warning">You have no rights to access this system.</span>';
@@ -53,6 +61,13 @@ class Login extends CI_Controller {
 
 	public function logout()
 	{
+		$config = array(
+				'user_id' => $this->session->userdata('id'),
+				'logout'  => date('Y-m-d H:i:s')
+			);
+
+		$this->logs_model->store($config);
+
 		$this->session->sess_destroy();
 
 		redirect('login/index');
