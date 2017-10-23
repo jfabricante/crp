@@ -29,6 +29,30 @@ class Docs_model extends CI_Model {
 		return $query->result_array();
 	}
 
+	public function fetchRecentDocs(array $params = array('type' => 'object'))
+	{
+		$fields = array(
+				'a.id',
+				'a.doc_name',
+				'a.datetime',
+				'b.name AS category'
+			);
+
+		$query = $this->db->select($fields)
+				->from('docs_tbl AS a')
+				->join('category_tbl AS b', 'a.category_id = b.id', 'LEFT')
+				->order_by('a.id', 'DESC')
+				->limit(3)
+				->get();
+
+		if ($params['type'] == 'object')
+		{
+			return $query->result();
+		}
+
+		return $query->result_array();
+	}
+
 	public function browsePermission(array $params = array('type' => 'object'))
 	{
 		$fields = array(
