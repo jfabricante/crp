@@ -40,7 +40,7 @@ class Login extends CI_Controller {
 
 			$this->session->set_userdata($user_data);
 
-			redirect('/user/list_');
+			redirect('/login/home');
 		}
 
 		$data['message'] = '<span class="col-sm-12 alert alert-warning">You have no rights to access this system.</span>';
@@ -51,9 +51,12 @@ class Login extends CI_Controller {
 
 	public function home()
 	{
+		$this->load->model('docs_model');
+
 		$data = array(
 			'title'   => 'Home',
-			'content' => 'dashboard_view',
+			'content' => 'home_view',
+			'entities' => $this->docs_model->fetchRecentDocs()
 		);
 
 		$this->load->view('include/template', $data);
