@@ -9,7 +9,7 @@ class User extends CI_Controller
 
 		date_default_timezone_set('Asia/Manila');
 
-		$models = array('user_model', 'branch_model', 'position_model');
+		$models = array('user_model', 'branch_model', 'position_model', 'logs_model');
 
 		$this->load->model($models);
 	}
@@ -48,6 +48,7 @@ class User extends CI_Controller
 		$config = array_map('trim', $this->input->post());
 
 		$config['datetime'] = date('Y-m-d H:i:s');
+		$config['fullname'] = ucwords(strtolower($config['fullname']));
 
 		$this->user_model->store($config);
 
@@ -77,5 +78,27 @@ class User extends CI_Controller
 		$this->session->set_flashdata('message', '<div class="alert alert-success">User has been deleted!</div>');
 
 		redirect($this->agent->referrer());
+	}
+
+	public function logs()
+	{
+		$data = array(
+				'title'    => 'User\'s log',
+				'content'  => 'users/logs_view',
+				'entities' => $this->logs_model->browse()
+			);
+
+		/*echo '<pre>';
+		print_r($this->logs_model->browse());
+		echo '<pre>';
+*/
+		$this->load->view('include/template', $data);
+	}
+
+	public function showVars($var)
+	{
+		echo '<pre>';
+		print_r($var);
+		echo '</pre>';
 	}
 }

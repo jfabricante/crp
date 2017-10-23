@@ -45,12 +45,12 @@
 									<td><?php echo date('m/d/Y h:i A', strtotime($user->datetime)); ?></td>
 									<td>
 										<a href="<?php echo base_url('index.php/user/form/' . $user->id); ?>" data-toggle="modal" data-target=".bs-example-modal-sm">
-											<i class="fa fa-pencil" aria-hidden="true"></i>
+											<i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Click this icon to edit this item."></i>
 										</a>
 									</td>
 									<td>
 										<a href="<?php echo base_url('index.php/user/notice/' . $user->id); ?>" data-toggle="modal" data-target=".bs-example-modal-sm">
-											<i class="fa fa-trash" aria-hidden="true"></i>
+											<i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Click this icon to delete this item."></i>
 										</a>
 									</td>
 								</tr>

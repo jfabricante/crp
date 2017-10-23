@@ -20,14 +20,16 @@ class User_model extends CI_Model {
 				'a.username',
 				'a.fullname',
 				'a.emp_no',
-				'b.role_id',
-				//'c.user_type'
+				'b.user_type',
+				'c.name AS branch',
+				'd.name AS position'
 			);
 
 		$query = $this->db->select($fields)
 				->from('users_tbl AS a')
-				->join('users_role_tbl AS b', 'a.id = b.user_id', 'INNER')
-				->join('roles_tbl AS c', 'b.role_id = c.id', 'INNER')
+				->join('roles_tbl AS b', 'a.role_id = b.id', 'INNER')
+				->join('branches_tbl AS c', 'a.branch_id = c.id', 'LEFT')
+				->join('positions_tbl AS d', 'a.position_id = d.id', 'LEFT')
 				->where($config)
 				->get();
 
@@ -163,105 +165,5 @@ class User_model extends CI_Model {
 	{
 		$this->db->truncate('users_tbl');
 		$this->db->truncate('users_role_tbl');
-	}
-
-	public function update_allowance($params)
-	{
-		if (is_array($params['employee']))
-		{
-			$config = array(
-					'meal_allowance' => $params['remaining_credit']
-				);
-
-			$this->db->update('users_meal_allowance_tbl', $config, array('user_id' => $params['employee']['id']));
-		}
-	}
-
-	public function fetch_balances($type = 'object')
-	{
-		$fields = array(
-				'a.id',
-				'a.meal_allowance',
-				'b.emp_no',
-				'b.fullname',
-			);
-
-		$query = $this->db->select($fields)
-				->from('users_meal_allowance_tbl AS a')
-				->join('users_tbl AS b', 'a.user_id = b.id', 'INNER')
-				->order_by('b.emp_no')
-				->get();
-
-		if ($type == 'array')
-		{
-			return $query->result_array();
-		}
-
-		return $query->result();
-	}
-
-	public function read_balance($type = 'object')
-	{
-		$fields = array(
-				'a.id',
-				'a.meal_allowance',
-				'b.emp_no',
-				'b.fullname',
-			);
-
-		$query = $this->db->select($fields)
-				->from('users_meal_allowance_tbl AS a')
-				->join('users_tbl AS b', 'a.user_id = b.id', 'INNER')
-				->where('emp_no', $this->session->userdata('emp_no'))
-				->get();
-
-		if ($type == 'array')
-		{
-			return $query->row_array();
-		}
-
-		return $query->row();
-	}
-
-	public function fetchPurchasedItems($params)
-	{
-		$fields = array(
-				'a.id',
-				'a.datetime',
-				'd.name',
-				'b.quantity',
-				'b.price',
-				'b.total',
-				'c.fullname AS employee',
-				'e.fullname AS cashier'
-			);
-
-		$clause = array('c.emp_no' => $this->session->userdata('emp_no'));
-
-		if ($this->session->userdata('user_type') == 'employee')
-		{
-			$query = $this->db->select($fields)
-					->from('transaction_tbl AS a')
-					->join('transaction_item_tbl AS b', 'a.id = b.trans_id', 'INNER')
-					->join('users_tbl AS c', 'c.id = a.user_id', 'INNER')
-					->join('items_tbl AS d', 'd.id = b.item_id', 'INNER')
-					->join('users_tbl AS e', 'e.id = a.cashier_id', 'INNER')
-					->where($clause)
-					->where("DATE(a.datetime) BETWEEN '" . $params['from'] . "' AND '" . $params['to'] . "'")
-					->get();
-		}
-		else
-		{
-			$query = $this->db->select($fields)
-					->from('transaction_tbl AS a')
-					->join('transaction_item_tbl AS b', 'a.id = b.trans_id', 'INNER')
-					->join('users_tbl AS c', 'c.id = a.user_id', 'INNER')
-					->join('items_tbl AS d', 'd.id = b.item_id', 'INNER')
-					->join('users_tbl AS e', 'e.id = a.cashier_id', 'INNER')
-					->where("DATE(a.datetime) BETWEEN '" . $params['from'] . "' AND '" . $params['to'] . "'")
-					->get();
-		}
-
-		return $query->result_array();
 	}
 }
