@@ -22,8 +22,10 @@
 							<tr>
 								<th>#</th>
 								<th>Name</th>
-								<th></th>
-								<th></th>
+								<?php if($this->session->userdata('user_type') == 'Administrator'): ?>
+									<th></th>
+									<th></th>
+								<?php endif ?>
 							</tr>
 						</thead>
 
@@ -33,16 +35,18 @@
 								<tr>
 									<td><?php echo $count; ?></td>
 									<td><?php echo $entity->name; ?></td>
-									<td>
-										<a href="<?php echo base_url('index.php/category/form/' . $entity->id); ?>"  data-toggle="modal" data-target=".bs-example-modal-sm">
-											<i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Click this icon to edit this item."></i>
-										</a>
-									</td>
-									<td>
-										<a href="<?php echo base_url('index.php/category/notice/' . $entity->id); ?>" data-toggle="modal" data-target=".bs-example-modal-sm">
-											<i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Click this icon to delete this item."></i>
-										</a>
-									</td>
+									<?php if($this->session->userdata('user_type') == 'Administrator'): ?>
+										<td>
+											<a href="<?php echo base_url('index.php/category/form/' . $entity->id); ?>"  data-toggle="modal" data-target=".bs-example-modal-sm">
+												<i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Click this icon to edit this item."></i>
+											</a>
+										</td>
+										<td>
+											<a href="<?php echo base_url('index.php/category/notice/' . $entity->id); ?>" data-toggle="modal" data-target=".bs-example-modal-sm">
+												<i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Click this icon to delete this item."></i>
+											</a>
+										</td>
+									<?php endif ?>
 								</tr>
 								<?php $count++; ?>
 							<?php endforeach; ?>
