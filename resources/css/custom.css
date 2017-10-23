@@ -274,3 +274,9 @@ div.dropdown-menu.open{
 	right: 0;
 	margin: 0 10px 10px
 }
+
+@media print {
+html, body {
+       display: none;  /* hide whole page */
+    }
+}
