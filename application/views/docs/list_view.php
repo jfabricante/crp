@@ -1,4 +1,5 @@
 <link href="<?php echo base_url('resources/plugins/select2/css/select2.min.css');?>" rel="stylesheet" >
+<link href="<?php echo base_url('resources/js/printjs/dist/print.min.css') ?>" rel="stylesheet" type="text/css" >
 <!-- Items block -->
 <section class="content docs">
 	<!-- row -->
@@ -47,6 +48,9 @@
 													<li><a href="<?php echo  base_url('index.php/docs/modal_content/' . $entity['id']) ?>" data-toggle="modal" data-target=".bs-example-modal-md"><i class="fa fa-eye" aria-hidden="true"></i> View</a></li>
 
 													<li><a href="<?php echo $entity['full_path']?>" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Print</a></li>
+													<!-- <li onclick="printJS({printable: '<?php echo $entity['full_path']?>', type:'pdf', showModal:true})"><a href="#" ><i class="fa fa-print" aria-hidden="true"></i> Print</a></li> -->
+
+													<!-- <li onclick="printJS({printable: '<?php echo base_url('/resources/docs/CS170123.pdf')?>', type:'pdf', showModal:true})"><a href="#" ><i class="fa fa-print" aria-hidden="true"></i> Print</a></li> -->
 
 													<li><a href="<?php echo $entity['full_path']?>" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> Download</a></li>
 
@@ -118,6 +122,7 @@
 	</div>
 </div>
 <script src="<?php echo base_url('resources/plugins/select2/js/select2.min.js');?>"></script>
+<script src="<?php echo base_url('resources/js/printjs/dist/print.min.js'); ?>"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.table').DataTable();
