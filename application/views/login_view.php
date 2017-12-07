@@ -21,6 +21,20 @@
 		<!-- Custom Style for CMS -->
 		<link rel="stylesheet" href="<?php echo base_url('resources/css/custom.css');?>">
 		<link rel="shortcut icon" href="<?php echo base_url('resources/images/favicon.ico');?>" type="image/x-icon"/ >
+
+		<style type="text/css">
+			.overlay {
+			    /*background-color: rgba(0, 0, 0, 0.8);*/
+			    background: black;
+			    z-index: 999;
+			    position: absolute;
+			    left: 0;
+			    top: 0;
+			    width: 100%;
+			    height: 100%;
+			    display: none;
+			}
+		</style>
 	</head>
 
 	<body class="hold-transition login-page">
@@ -67,5 +81,18 @@
 
 		<!-- Bootstrap 3.3.6 -->
 		<script src="<?php echo base_url('resources/templates/bootstrap-3.3.7/js/bootstrap.min.js');?>"></script>
+
+		<!-- Is JS -->
+		<script src="<?php echo base_url('resources/js/is_js/is.min.js') ?>"></script>
+		<script type="text/javascript">
+			(function() {
+				if (!is.ie())
+				{
+					$('body').addClass('overlay');
+					alert('Please use Internet Explorer Version 11 or Higher');
+				}
+			})();
+		</script>
 	</body>
+
 </html>
