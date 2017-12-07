@@ -231,7 +231,7 @@ class Docs extends CI_Controller
 
 	protected function _redirectUnauthorized()
 	{
-		if (count($this->session->userdata) < 3)
+		if (count($this->session->userdata()) < 3)
 		{
 			$this->session->set_flashdata('message', '<div class="alert alert-warning">Login first!</div>');
 

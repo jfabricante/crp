@@ -7,6 +7,8 @@ class Request extends CI_Controller
 	{
 		parent::__construct();
 
+		$this->_redirectUnauthorized();
+
 		// Set the default timezone
 		date_default_timezone_set('Asia/Manila');
 
@@ -138,6 +140,16 @@ class Request extends CI_Controller
 			{
 				$this->showVars($entity);
 			}
+		}
+	}
+
+	protected function _redirectUnauthorized()
+	{
+		if (count($this->session->userdata()) < 3)
+		{
+			$this->session->set_flashdata('message', '<div class="alert alert-warning">Login first!</div>');
+
+			redirect(base_url());
 		}
 	}
 

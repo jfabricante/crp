@@ -7,6 +7,8 @@ class Position extends CI_Controller
 	{
 		parent::__construct();
 
+		$this->_redirectUnauthorized();
+
 		$this->load->model('position_model');
 	}
 
@@ -73,5 +75,15 @@ class Position extends CI_Controller
 		$this->session->set_flashdata('message', '<div class="alert alert-success">Position has been deleted!</div>');
 
 		redirect($this->agent->referrer());
+	}
+
+	protected function _redirectUnauthorized()
+	{
+		if (count($this->session->userdata()) < 3)
+		{
+			$this->session->set_flashdata('message', '<div class="alert alert-warning">Login first!</div>');
+
+			redirect(base_url());
+		}
 	}
 }

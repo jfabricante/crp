@@ -7,6 +7,8 @@ class User extends CI_Controller
 	{
 		parent::__construct();
 
+		$this->_redirectUnauthorized();
+
 		date_default_timezone_set('Asia/Manila');
 
 		$models = array('user_model', 'branch_model', 'position_model', 'logs_model');
@@ -88,11 +90,17 @@ class User extends CI_Controller
 				'entities' => $this->logs_model->browse()
 			);
 
-		/*echo '<pre>';
-		print_r($this->logs_model->browse());
-		echo '<pre>';
-*/
 		$this->load->view('include/template', $data);
+	}
+
+	protected function _redirectUnauthorized()
+	{
+		if (count($this->session->userdata()) < 3)
+		{
+			$this->session->set_flashdata('message', '<div class="alert alert-warning">Login first!</div>');
+
+			redirect(base_url());
+		}
 	}
 
 	public function showVars($var)
