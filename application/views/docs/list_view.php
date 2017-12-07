@@ -47,8 +47,8 @@
 												<ul class="dropdown-menu">
 													<li><a href="<?php echo  base_url('index.php/docs/modal_content/' . $entity['id']) ?>" data-toggle="modal" data-target=".bs-example-modal-md"><i class="fa fa-eye" aria-hidden="true"></i> View</a></li>
 
-													<li><a href="<?php echo $entity['full_path']?>" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Print</a></li>
-													<!-- <li onclick="printJS({printable: '<?php echo $entity['full_path']?>', type:'pdf', showModal:true})"><a href="#" ><i class="fa fa-print" aria-hidden="true"></i> Print</a></li> -->
+													<!-- <li><a href="<?php echo $entity['full_path']?>" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Print</a></li> -->
+													<li onclick="printJS({printable: '<?php echo $entity['full_path']?>', type:'pdf', showModal:true})"><a href="#" ><i class="fa fa-print" aria-hidden="true"></i> Print</a></li>
 
 													<!-- <li onclick="printJS({printable: '<?php echo base_url('/resources/docs/CS170123.pdf')?>', type:'pdf', showModal:true})"><a href="#" ><i class="fa fa-print" aria-hidden="true"></i> Print</a></li> -->
 
@@ -139,5 +139,17 @@
 		});
 	});
 
+    function AccessClipboardData() {
+		try {
+			window.clipboardData.setData('text', "No print data");
+		} catch (err) {
+			txt = "There was an error on this page.\n\n";
+			txt += "Error description: " + err.description + "\n\n";
+			txt += "Click OK to continue.\n\n";
+			console.log(txt);
+		}
+    }
+
+    setInterval("AccessClipboardData()", 300);
 </script>
 
