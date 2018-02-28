@@ -86,10 +86,10 @@
 		<script src="<?php echo base_url('resources/js/is_js/is.min.js') ?>"></script>
 		<script type="text/javascript">
 			(function() {
-				if (!is.ie())
+				if (!is.ie(11))
 				{
 					$('body').addClass('overlay');
-					alert('Please use Internet Explorer Version 11 or Higher');
+					alert('Please use Internet Explorer Version 11');
 				}
 			})();
 		</script>
