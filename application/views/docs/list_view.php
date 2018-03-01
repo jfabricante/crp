@@ -5,17 +5,19 @@
 	<!-- row -->
 	<div class="row">
 		<!-- col-md-6 -->
-		<div class="col-md-5">
+		<div class="col-md-6">
 			<!-- Box danger -->
 			<?php echo $this->session->flashdata('message'); ?>
 
 			<div class="box box-danger">
 				<!-- Content -->
-				<div class="box-header with-border">
-					<a href="<?php echo base_url('index.php/docs/form') ?>" data-toggle="modal" data-target=".bs-example-modal-sm">
-						<button class="btn btn-flat btn-success pull-right">Add Document <i class="fa fw fa-plus" aria-hidden="true"></i></button>
-					</a>
-				</div>
+				<?php if ($this->session->userdata('user_type') == 'Administrator'): ?>
+					<div class="box-header with-border">
+						<a href="<?php echo base_url('index.php/docs/form') ?>" data-toggle="modal" data-target=".bs-example-modal-sm">
+							<button class="btn btn-flat btn-success pull-right">Add Document <i class="fa fw fa-plus" aria-hidden="true"></i></button>
+						</a>
+					</div>
+				<?php endif ?>
 
 				<div class="box-body">
 					<!-- Item table -->
