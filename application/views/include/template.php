@@ -65,6 +65,11 @@
 		</div>
 		<!-- End page wrapper -->
 
+		<!-- Admin LTE core CSS -->
+		<link href="<?php echo base_url('resources/templates/AdminLTE-2.3.5/dist/css/AdminLTE.min.css');?>" rel="stylesheet" >
+
+		<!-- Custom CSS -->
+		<link href="<?php echo base_url('resources/css/custom.css');?>" rel="stylesheet" >
 	</body>
 	<!-- End of body -->
 </html>
