@@ -280,3 +280,10 @@ html, body {
        display: none;  /* hide whole page */
     }
 }
+
+/**
+ * Select 2
+ */
+span.select2 {
+	width: 100% !important;
+}
