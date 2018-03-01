@@ -39,7 +39,7 @@ class Request extends CI_Controller
 				'type' => 'object'
 			);
 
-		$permissions = array('view', 'print');
+		$permissions = array('view', 'print', 'download');
 
 		$data = array(
 				'title'       => $id ? 'Update Details' : 'Request for Approval Form',
