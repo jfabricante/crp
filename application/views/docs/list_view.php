@@ -63,33 +63,31 @@
 													<li><a href="<?php echo base_url('index.php/docs/notice/' . $entity['id']); ?>" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
 												</ul>
 											<?php else: ?>
-												<?php if ($entity['has_menu']): ?>
 													<ul class="dropdown-menu">
-														<?php if ($entity['view_doc']): ?>
-															<li><a href="<?php echo  base_url('index.php/docs/modal_content/' . $entity['id']) ?>" data-toggle="modal" data-target=".bs-example-modal-md"><i class="fa fa-eye" aria-hidden="true"></i> View</a></li>
-														<?php endif ?>
+														<li><a href="<?php echo  base_url('index.php/docs/modal_content/' . $entity['id']) ?>" data-toggle="modal" data-target=".bs-example-modal-md"><i class="fa fa-eye" aria-hidden="true"></i> View</a></li>
+														<?php if ($entity['has_menu']): ?>
+															<?php if ($entity['print_doc']): ?>
+																<li><a href="<?php echo $entity['full_path']?>" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Print</a></li>
+															<?php endif ?>
 
-														<?php if ($entity['print_doc'] > 0): ?>
-															<li><a href="<?php echo $entity['full_path']?>" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Print</a></li>
-														<?php endif ?>
+															<?php if ($entity['download_doc']): ?>
+																<li><a href="<?php echo $entity['full_path']?>" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> Download</a></li>
+															<?php endif ?>
 
-														<?php if ($entity['download_doc']): ?>
-															<li><a href="<?php echo $entity['full_path']?>" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> Download</a></li>
-														<?php endif ?>
+															<?php if ($entity['archive_doc']): ?>
+																<li><a href="<?php echo base_url('index.php/docs/archive/' . $entity['id']) ?>"><i class="fa fa-archive" aria-hidden="true"></i> Archive</a></li>
+															<?php endif ?>
 
-														<?php if ($entity['archive_doc']): ?>
-															<li><a href="<?php echo base_url('index.php/docs/archive/' . $entity['id']) ?>"><i class="fa fa-archive" aria-hidden="true"></i> Archive</a></li>
-														<?php endif ?>
+															<?php if ($entity['edit_doc']): ?>
+																<li><a href="<?php echo base_url('index.php/docs/form/' . $entity['id']); ?>" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a></li>
+															<?php endif ?>
 
-														<?php if ($entity['edit_doc']): ?>
-															<li><a href="<?php echo base_url('index.php/docs/form/' . $entity['id']); ?>" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</a></li>
-														<?php endif ?>
-
-														<?php if ($entity['delete_doc']): ?>
-															<li><a href="<?php echo base_url('index.php/docs/notice/' . $entity['id']); ?>" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
-														<?php endif ?>
+															<?php if ($entity['delete_doc']): ?>
+																<li><a href="<?php echo base_url('index.php/docs/notice/' . $entity['id']); ?>" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></li>
+															<?php endif ?>
+														<?php endif; ?>
 													</ul>
-												<?php endif; ?>
+												
 											<?php endif ?>
 										</div>
 									</td>
