@@ -33,7 +33,9 @@
 
 			<li class="<?php echo $menu == 'login/home' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/login/home') ?>"><i class="fa fa-home" aria-hidden="true"></i><span>Home</span></a></li>
 
-			<li class="<?php echo $menu == 'category/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/category/list_') ?>"><i class="fa fa-tags" aria-hidden="true"></i><span>Categories</span></a></li>
+			<?php if ($this->session->userdata('user_type') == 'Administrator'): ?>
+				<li class="<?php echo $menu == 'category/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/category/list_') ?>"><i class="fa fa-tags" aria-hidden="true"></i><span>Categories</span></a></li>
+			<?php endif ?>
 
 			<li class="<?php echo $menu == 'docs/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/docs/list_') ?>"><i class="fa fa-file" aria-hidden="true"></i><span>Documents</span></a></li>
 
@@ -45,8 +47,11 @@
 				<li class="<?php echo $menu == 'branch/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/branch/list_') ?>"><i class="fa fa-share-alt" aria-hidden="true"></i><span>Branches</span></a></li>
 
 				<li class="<?php echo $menu == 'position/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/position/list_') ?>"><i class="fa fa-sitemap" aria-hidden="true"></i><span>Positions</span></a></li>
+			<?php endif ?>
 
 				<li class="<?php echo $menu == 'user/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/user/list_') ?>"><i class="fa fa-user" aria-hidden="true"></i><span>Users</span></a></li>
+
+			<?php if ($this->session->userdata('user_type') == 'Administrator'): ?>
 
 				<li class="<?php echo $menu == 'user/logs' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/user/logs') ?>"><i class="fa fa-history" aria-hidden="true"></i><span>User's Log</span></a></li>
 			<?php endif ?>
