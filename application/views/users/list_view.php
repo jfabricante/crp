@@ -3,15 +3,18 @@
 	<!-- row -->
 	<div class="row">
 		<!-- col-md-6 -->
-		<div class="col-md-12">
+		<div class="<?php echo $this->session->userdata('user_type') == 'Administrator' ? 'col-md-12' : 'col-md-9' ?>">
 			<!-- Box danger -->
 			<div class="box box-danger">
 				<!-- Content -->
-				<div class="box-header with-border">
-					<a href="<?php echo base_url('index.php/user/form') ?>" data-toggle="modal" data-target=".bs-example-modal-sm">
-						<button class="btn btn-flat btn-success pull-right">Add User <i class="fa fw fa-plus" aria-hidden="true"></i></button>
-					</a>
-				</div>
+
+				<?php if ($this->session->userdata('user_type') == 'Administrator'): ?>
+					<div class="box-header with-border">
+						<a href="<?php echo base_url('index.php/user/form') ?>" data-toggle="modal" data-target=".bs-example-modal-sm">
+							<button class="btn btn-flat btn-success pull-right">Add User <i class="fa fw fa-plus" aria-hidden="true"></i></button>
+						</a>
+					</div>
+				<?php endif ?>
 
 				<div class="box-body">
 					<!-- Item table -->
@@ -19,16 +22,22 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Username</th>
-								<th>Employee no.</th>
+								<?php if ($this->session->userdata('user_type') == 'Administrator'): ?>
+									<th>Username</th>
+									<th>Employee no.</th>
+								<?php endif ?>
 								<th>Fullname</th>
-								<th>User type</th>
+								<?php if ($this->session->userdata('user_type') == 'Administrator'): ?>
+									<th>User type</th>
+								<?php endif ?>
 								<th>Branch</th>
 								<th>Position</th>
 								<th>Email</th>
-								<th>Date Time</th>
-								<th>Edit</th>
-								<th>Delete</th>
+								<?php if ($this->session->userdata('user_type') == 'Administrator'): ?>
+									<th>Date Time</th>
+									<th>Edit</th>
+									<th>Delete</th>
+								<?php endif ?>
 							</tr>
 						</thead>
 
@@ -37,24 +46,30 @@
 							<?php foreach($entities as $user): ?>
 								<tr>
 									<td><?php echo $count ?></td>
-									<td><?php echo $user->username; ?></td>
-									<td><?php echo $user->emp_no; ?></td>
+									<?php if ($this->session->userdata('user_type') == 'Administrator'): ?>
+										<td><?php echo $user->username; ?></td>
+										<td><?php echo $user->emp_no; ?></td>
+									<?php endif ?>
 									<td><?php echo ucwords(strtolower($user->fullname)); ?></td>
-									<td><?php echo ucfirst($user->user_type); ?></td>
+									<?php if ($this->session->userdata('user_type') == 'Administrator'): ?>
+										<td><?php echo ucfirst($user->user_type); ?></td>
+									<?php endif ?>
 									<td><?php echo $user->branch; ?></td>
 									<td><?php echo $user->position; ?></td>
 									<td><?php echo $user->email; ?></td>
-									<td><?php echo date('m/d/Y h:i A', strtotime($user->datetime)); ?></td>
-									<td>
-										<a href="<?php echo base_url('index.php/user/form/' . $user->id); ?>" data-toggle="modal" data-target=".bs-example-modal-sm">
-											<i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Click this icon to edit this item."></i>
-										</a>
-									</td>
-									<td>
-										<a href="<?php echo base_url('index.php/user/notice/' . $user->id); ?>" data-toggle="modal" data-target=".bs-example-modal-sm">
-											<i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Click this icon to delete this item."></i>
-										</a>
-									</td>
+									<?php if ($this->session->userdata('user_type') == 'Administrator'): ?>
+										<td><?php echo date('m/d/Y h:i A', strtotime($user->datetime)); ?></td>
+										<td>
+											<a href="<?php echo base_url('index.php/user/form/' . $user->id); ?>" data-toggle="modal" data-target=".bs-example-modal-sm">
+												<i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Click this icon to edit this item."></i>
+											</a>
+										</td>
+										<td>
+											<a href="<?php echo base_url('index.php/user/notice/' . $user->id); ?>" data-toggle="modal" data-target=".bs-example-modal-sm">
+												<i class="fa fa-trash" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Click this icon to delete this item."></i>
+											</a>
+										</td>
+									<?php endif ?>
 								</tr>
 								<?php $count++; ?>
 							<?php endforeach; ?>
