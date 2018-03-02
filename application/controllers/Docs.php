@@ -241,11 +241,15 @@ class Docs extends CI_Controller
 
 	public function download_doc()
 	{
-		$name = $this->uri->segment(3);
-		$path = base_url('resources/docs/' . $name);
+		$doc_id = $this->uri->segment(3);
+
+		// Get the document entity
+		$doc = $this->docs_model->read(array('id' => $doc_id, 'type' => 'array'));
+
+		$path = base_url('resources/docs/' . $doc['file_name']);
 
 		header("Content-type: application/octet-stream");
-		header('Content-Disposition: attachment; filename="' . $name . '"');
+		header('Content-Disposition: attachment; filename="' . $doc['file_name'] . '"');
 		readfile($path);
 		exit();
 	}

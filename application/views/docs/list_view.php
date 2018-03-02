@@ -51,7 +51,7 @@
 
 													<li><a href="<?php echo base_url('resources/docs/' . $entity['file_name']) ?>" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Print</a></li>
 
-													<li><a href="<?php echo base_url('index.php/docs/download_doc/' . $entity['file_name']) ?>" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> Download</a></li>
+													<li><a href="<?php echo base_url('index.php/docs/download_doc/' . $entity['id']) ?>" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> Download</a></li>
 
 													<li><a href="<?php echo base_url('index.php/docs/archive/' . $entity['id']) ?>"><i class="fa fa-archive" aria-hidden="true"></i> Archive</a></li>
 
@@ -68,7 +68,7 @@
 														<?php endif ?>
 
 														<?php if ($entity['download_doc']): ?>
-															<li><a href="<?php echo base_url('index.php/docs/download_doc/' . $entity['file_name']) ?>" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> Download</a></li>
+															<li><a href="<?php echo base_url('index.php/docs/download_doc/' . $entity['id']) ?>" target="_blank"><i class="fa fa-download" aria-hidden="true"></i> Download</a></li>
 														<?php endif ?>
 
 														<?php if ($entity['archive_doc']): ?>
