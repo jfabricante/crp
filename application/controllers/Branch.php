@@ -10,14 +10,16 @@ class Branch extends CI_Controller
 		$this->_redirectUnauthorized();
 
 		$this->load->model('branch_model');
+		$this->load->model('category_model');
 	}
 
 	public function list_()
 	{
 		$data = array(
-				'title'    => 'List of Branches',
-				'content'  => 'branches/list_view',
-				'entities' => $this->branch_model->browse()
+				'title'     => 'List of Branches',
+				'content'   => 'branches/list_view',
+				'entities'  => $this->branch_model->browse(),
+				'sub_menus' => $this->category_model->browse(array('type' => 'array'))
 			);
 
 		$this->load->view('include/template', $data);
