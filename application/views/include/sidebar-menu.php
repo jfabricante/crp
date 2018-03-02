@@ -29,31 +29,53 @@
 		<ul class="sidebar-menu">
 			<li class="header">MAIN NAVIGATION</li>
 			
-			<?php $menu = $this->uri->uri_string(); ?>
+			<?php $current_menu = $this->uri->uri_string(); ?>
 
-			<li class="<?php echo $menu == 'login/home' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/login/home') ?>"><i class="fa fa-home" aria-hidden="true"></i><span>Home</span></a></li>
+			<li class="<?php echo $current_menu == 'login/home' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/login/home') ?>"><i class="fa fa-home" aria-hidden="true"></i><span>Home</span></a></li>
 
 			<?php if ($this->session->userdata('user_type') == 'Administrator'): ?>
-				<li class="<?php echo $menu == 'category/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/category/list_') ?>"><i class="fa fa-tags" aria-hidden="true"></i><span>Categories</span></a></li>
+				<li class="<?php echo $current_menu == 'category/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/category/list_') ?>"><i class="fa fa-tags" aria-hidden="true"></i><span>Categories</span></a></li>
 			<?php endif ?>
 
-			<li class="<?php echo $menu == 'docs/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/docs/list_') ?>"><i class="fa fa-file" aria-hidden="true"></i><span>Documents</span></a></li>
+			<?php
+				$group_menu = array_map(function($row) {
+					return trim('docs/category_content/' . $row['id']);
+				}, $sub_menus);
+			?>
 
-			<li class="<?php echo $menu == 'request/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/request/list_') ?>"><i class="fa fa-paper-plane" aria-hidden="true"></i><span>Requests</span></a></li>
+			<li class="treeview <?php echo in_array($current_menu, $group_menu) ? 'active' : ''; ?>">
+			<!-- <li class="treeview active"> -->
+				<a href="#">
+					<i class="fa fa-newspaper-o"></i> <span>Documents</span>
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
 
-			<li class="<?php echo $menu == 'request/approved_list' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/request/approved_list') ?>"><i class="fa fa-check-circle" aria-hidden="true"></i><span>Approved Requests</span></a></li>
+				<!-- group menu items -->
+				<ul class="treeview-menu">
+
+					<?php foreach($sub_menus as $menu): ?>
+						<li class="<?php echo $current_menu == ('docs/category_content/' . $menu['id']) ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/docs/category_content/' . $menu['id']) ?>"><i class="fa fa-circle-o"></i><span><?php echo $menu['name'] ?></span></a></li>
+					<?php endforeach ?>
+				</ul>
+			</li>
+
+			<li class="<?php echo $current_menu == 'request/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/request/list_') ?>"><i class="fa fa-paper-plane" aria-hidden="true"></i><span>Requests</span></a></li>
+
+			<li class="<?php echo $current_menu == 'request/approved_list' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/request/approved_list') ?>"><i class="fa fa-check-circle" aria-hidden="true"></i><span>Approved Requests</span></a></li>
 
 			<?php if ($this->session->userdata('user_type') == 'Administrator'): ?>
-				<li class="<?php echo $menu == 'branch/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/branch/list_') ?>"><i class="fa fa-share-alt" aria-hidden="true"></i><span>Branches</span></a></li>
+				<li class="<?php echo $current_menu == 'branch/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/branch/list_') ?>"><i class="fa fa-share-alt" aria-hidden="true"></i><span>Branches</span></a></li>
 
-				<li class="<?php echo $menu == 'position/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/position/list_') ?>"><i class="fa fa-sitemap" aria-hidden="true"></i><span>Positions</span></a></li>
+				<li class="<?php echo $current_menu == 'position/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/position/list_') ?>"><i class="fa fa-sitemap" aria-hidden="true"></i><span>Positions</span></a></li>
 			<?php endif ?>
 
-				<li class="<?php echo $menu == 'user/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/user/list_') ?>"><i class="fa fa-user" aria-hidden="true"></i><span>Users</span></a></li>
+				<li class="<?php echo $current_menu == 'user/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/user/list_') ?>"><i class="fa fa-user" aria-hidden="true"></i><span>Users</span></a></li>
 
 			<?php if ($this->session->userdata('user_type') == 'Administrator'): ?>
 
-				<li class="<?php echo $menu == 'user/logs' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/user/logs') ?>"><i class="fa fa-history" aria-hidden="true"></i><span>User's Log</span></a></li>
+				<li class="<?php echo $current_menu == 'user/logs' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/user/logs') ?>"><i class="fa fa-history" aria-hidden="true"></i><span>User's Log</span></a></li>
 			<?php endif ?>
 
 		</ul><!-- /.sidebar-menu -->
