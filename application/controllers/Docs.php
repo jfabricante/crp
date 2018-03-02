@@ -21,17 +21,36 @@ class Docs extends CI_Controller
 		$entities = $this->_docsPermission();
 
 		$data = array(
-				'title'    => 'List of Documents',
-				'content'  => 'docs/list_view',
-				'entities' => $this->session->userdata('user_type') == 'Administrator' ? $this->docs_model->browse(array('type' => 'array')) : $entities
+				'title'     => 'List of Documents',
+				'content'   => 'docs/list_view',
+				'entities'  => $this->session->userdata('user_type') == 'Administrator' ? $this->docs_model->browse(array('type' => 'array')) : $entities,
+				'sub_menus' => $this->category_model->browse(array('type' => 'array'))
 			);
 
 		$this->load->view('include/template', $data);
 	}
 
-	protected function _docsPermission()
+	public function category_content()
 	{
-		$docs = $this->docs_model->browse(array('type' => 'array'));
+		$category_id = $this->uri->segment(3);
+
+		$category = $this->category_model->read(array('id' => $category_id, 'type' => 'array'));
+
+		$entities = $this->session->userdata('user_type') == 'Administrator' ? $this->docs_model->browseByCategory($category_id) : $this->_docsPermission($category_id);
+
+		$data = array(
+				'title'     => 'List of ' . $category['name'],
+				'content'   => 'docs/category_content_view',
+				'entities'  => $entities,
+				'sub_menus' => $this->category_model->browse(array('type' => 'array'))
+			);
+
+		$this->load->view('include/template', $data);
+	}
+
+	protected function _docsPermission($params)
+	{
+		$docs = $this->docs_model->browseByCategory($params);
 
 		$entities = array();
 
