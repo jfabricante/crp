@@ -13,7 +13,7 @@ class Request extends CI_Controller
 		date_default_timezone_set('Asia/Manila');
 
 		// List of models
-		$models = array('request_model', 'docs_model');
+		$models = array('request_model', 'docs_model', 'category_model');
 
 		// Load models
 		$this->load->model($models);
@@ -22,9 +22,10 @@ class Request extends CI_Controller
 	public function list_()
 	{
 		$data = array(
-				'title'    => 'List of Requests',
-				'content'  => 'requests/list_view',
-				'entities' => $this->request_model->browse()
+				'title'     => 'List of Requests',
+				'content'   => 'requests/list_view',
+				'entities'  => $this->request_model->browse(),
+				'sub_menus' => $this->category_model->browse(array('type' => 'array'))
 			);
 
 		$this->load->view('include/template', $data);
@@ -94,9 +95,10 @@ class Request extends CI_Controller
 	public function approved_list()
 	{
 		$data = array(
-				'title'    => 'List of Approved Requests',
-				'content'  => 'requests/approved_view',
-				'entities' => $this->request_model->fetchApprovedList()
+				'title'     => 'List of Approved Requests',
+				'content'   => 'requests/approved_view',
+				'entities'  => $this->request_model->fetchApprovedList(),
+				'sub_menus' => $this->category_model->browse(array('type' => 'array'))
 			);
 
 		$this->load->view('include/template', $data);

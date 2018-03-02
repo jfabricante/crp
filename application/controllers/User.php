@@ -11,7 +11,7 @@ class User extends CI_Controller
 
 		date_default_timezone_set('Asia/Manila');
 
-		$models = array('user_model', 'branch_model', 'position_model', 'logs_model');
+		$models = array('user_model', 'branch_model', 'position_model', 'logs_model', 'category_model');
 
 		$this->load->model($models);
 	}
@@ -19,9 +19,10 @@ class User extends CI_Controller
 	public function list_()
 	{
 		$data = array(
-				'title'    => 'List of Users',
-				'content'  => 'users/list_view',
-				'entities' => $this->user_model->fetch()
+				'title'     => 'List of Users',
+				'content'   => 'users/list_view',
+				'entities'  => $this->user_model->fetch(),
+				'sub_menus' => $this->category_model->browse(array('type' => 'array'))
 			);
 
 		$this->load->view('include/template', $data);
@@ -85,9 +86,10 @@ class User extends CI_Controller
 	public function logs()
 	{
 		$data = array(
-				'title'    => 'User\'s log',
-				'content'  => 'users/logs_view',
-				'entities' => $this->logs_model->browse()
+				'title'     => 'User\'s log',
+				'content'   => 'users/logs_view',
+				'entities'  => $this->logs_model->browse(),
+				'sub_menus' => $this->category_model->browse(array('type' => 'array'))
 			);
 
 		$this->load->view('include/template', $data);
