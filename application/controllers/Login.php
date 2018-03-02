@@ -15,6 +15,7 @@ class Login extends CI_Controller {
 
 		// Load logs model
 		$this->load->model('logs_model');
+		$this->load->model('category_model');
 	}
 
 	public function index()
@@ -54,9 +55,10 @@ class Login extends CI_Controller {
 		$this->load->model('docs_model');
 
 		$data = array(
-			'title'   => 'Home',
-			'content' => 'home_view',
-			'entities' => $this->docs_model->fetchRecentDocs()
+			'title'     => 'Home',
+			'content'   => 'home_view',
+			'entities'  => $this->docs_model->fetchRecentDocs(),
+			'sub_menus' => $this->category_model->browse(array('type' => 'array'))
 		);
 
 		$this->load->view('include/template', $data);
