@@ -15,9 +15,10 @@ class Category extends CI_Controller
 	public function list_()
 	{
 		$data = array(
-				'title'    => 'List of Categories',
-				'content'  => 'category/list_view',
-				'entities' => $this->category_model->browse()
+				'title'     => 'List of Categories',
+				'content'   => 'category/list_view',
+				'entities'  => $this->category_model->browse(),
+				'sub_menus' => $this->category_model->browse(array('type' => 'array'))
 			);
 
 		$this->load->view('include/template', $data);
