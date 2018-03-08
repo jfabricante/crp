@@ -46,7 +46,7 @@
 											</button>
 											<?php if($this->session->userdata('user_type') == 'Administrator'): ?>
 												<ul class="dropdown-menu">
-													<li><a href="<?php echo  base_url('index.php/docs/modal_content/' . $entity['id']) ?>" data-toggle="modal" data-target=".bs-example-modal-md"><i class="fa fa-eye" aria-hidden="true"></i> View</a></li>
+													<li><a href="<?php echo  base_url('index.php/docs/modal_content/' . $entity['id'] . '/' . $this->session->userdata('id')) ?>" data-toggle="modal" data-target=".bs-example-modal-md"><i class="fa fa-eye" aria-hidden="true"></i> View</a></li>
 
 													<li><a href="<?php echo base_url('resources/docs/' . $entity['file_name']) ?>" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Print</a></li>
 
@@ -60,7 +60,7 @@
 												</ul>
 											<?php else: ?>
 												<ul class="dropdown-menu">
-													<li><a href="<?php echo  base_url('index.php/docs/modal_content/' . $entity['id']) ?>" data-toggle="modal" data-target=".bs-example-modal-md"><i class="fa fa-eye" aria-hidden="true"></i> View</a></li>
+													<li><a href="<?php echo  base_url('index.php/docs/modal_content/' . $entity['id'] . '/' . $this->session->userdata('id')) ?>" data-toggle="modal" data-target=".bs-example-modal-md"><i class="fa fa-eye" aria-hidden="true"></i> View</a></li>
 													<?php if ($entity['has_menu']): ?>
 														<?php if ($entity['print_doc']): ?>
 															<li><a href="<?php echo base_url('resources/docs/' . $entity['file_name']) ?>" target="_blank"><i class="fa fa-print" aria-hidden="true"></i> Print</a></li>
