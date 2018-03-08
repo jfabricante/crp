@@ -27,6 +27,7 @@
 								<th>#</th>
 								<th>Document Name</th>
 								<th>Action</th>
+								<th>Views</th>
 							</tr>
 						</thead>
 
@@ -85,6 +86,7 @@
 											<?php endif ?>
 										</div>
 									</td>
+									<td><span class="label bg-green"><?php echo $entity['views'] ? $entity['views'] : 0  ?></span></td>
 								</tr>
 								<?php $count++; ?>
 							<?php endforeach; ?>
