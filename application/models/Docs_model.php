@@ -142,6 +142,11 @@ class Docs_model extends CI_Model {
 		return $this;
 	}
 
+	public function storeViews($params)
+	{
+		$this->db->insert('docs_views_tbl', $params);
+	}
+
 	public function showVars($var)
 	{
 		echo '<pre>';
