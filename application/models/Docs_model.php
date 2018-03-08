@@ -36,12 +36,15 @@ class Docs_model extends CI_Model {
 				'a.doc_name',
 				'a.full_path',
 				'a.file_name',
-				'b.name AS category'
+				'b.name AS category',
+				'COUNT(c.docs_id) AS views'
 			);
 		$query = $this->db->select($fields)
 				->from('docs_tbl AS a')
 				->join('category_tbl AS b', 'a.category_id = b.id', 'INNER')
+				->join('docs_views_tbl AS c', 'a.id = c.docs_id', 'LEFT')
 				->where('a.category_id', $params)
+				->group_by('a.id')
 				->get();
 
 		return $query->result_array();
