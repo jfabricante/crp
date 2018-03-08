@@ -78,7 +78,8 @@ class Docs extends CI_Controller
 						'archive_doc'  => $perm['archive_doc'],
 						'edit_doc'     => $perm['edit_doc'],
 						'delete_doc'   => $perm['delete_doc'],
-						'has_menu'     => true
+						'has_menu'     => true,
+						'views'        => $doc['views']
 					);
 			}
 			else
@@ -95,7 +96,8 @@ class Docs extends CI_Controller
 						'archive_doc'  => 0,
 						'edit_doc'     => 0,
 						'delete_doc'   => 0,
-						'has_menu'     => false
+						'has_menu'     => false,
+						'views'        => $doc['views']
 					);
 			}
 		}
@@ -123,7 +125,8 @@ class Docs extends CI_Controller
 
 	public function modal_content()
 	{
-		$id = $this->uri->segment(3);
+		$id      = $this->uri->segment(3);
+		$user_id = $this->uri->segment(4);
 
 		$config = array(
 				'id'   => $id,
@@ -138,6 +141,8 @@ class Docs extends CI_Controller
 			);
 
 		$this->load->view('docs/doc_content_view', $data);
+
+		$this->_incrementViews();
 	}
 
 	public function notice()
