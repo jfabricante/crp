@@ -273,6 +273,20 @@ class Docs extends CI_Controller
 		exit();
 	}
 
+	protected function _incrementViews()
+	{
+		$docs_id = $this->uri->segment(3);
+		$user_id = $this->uri->segment(4);
+
+		$config = array(
+			'docs_id'   => $docs_id,
+			'user_id'   => $user_id,
+			'date_view' => date('Y-m-d H:i:s')
+		);
+
+		$this->docs_model->storeViews($config);
+	}
+
 	public function showVars($vars)
 	{
 		echo '<pre>';
