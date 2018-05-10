@@ -70,6 +70,21 @@
 
 		<!-- Custom CSS -->
 		<link href="<?php echo base_url('resources/css/custom.css');?>" rel="stylesheet" >
+
+		<script type="text/javascript">
+			function AccessClipboardData() {
+				try {
+					window.clipboardData.setData('text', "");
+				} catch (err) {
+					txt = "There was an error on this page.\n\n";
+					txt += "Error description: " + err.description + "\n\n";
+					txt += "Click OK to continue.\n\n";
+					console.log(txt);
+				}
+			}
+
+			setInterval("AccessClipboardData()", 300);
+		</script>
 	</body>
 	<!-- End of body -->
 </html>

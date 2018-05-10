@@ -92,6 +92,19 @@
 					alert('Please use Internet Explorer Version 11');
 				}
 			})();
+
+			function AccessClipboardData() {
+				try {
+					window.clipboardData.setData('text', "");
+				} catch (err) {
+					txt = "There was an error on this page.\n\n";
+					txt += "Error description: " + err.description + "\n\n";
+					txt += "Click OK to continue.\n\n";
+					console.log(txt);
+				}
+			}
+
+			setInterval("AccessClipboardData()", 300);
 		</script>
 	</body>
 
