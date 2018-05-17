@@ -21,34 +21,56 @@ class Login extends CI_Controller {
 
 	public function index()
 	{
+		$this->_redirectIfAuthenticated();
+
 		$this->load->view('login_view');
 	}
 
 	public function authenticate()
 	{
-		$user_data = $this->_user_exist();
+		$user_data = $this->_user_exist($this->input->post('username'), $this->input->post('password'));
 
 		if ($this->_validate_input() && is_array($user_data))
 		{
+			// Verify if the user state is active
+			if ( !$this->user_model->checkState($user_data['id']) )
+			{
+				$config = array(
+						'user_id'   => $user_data['id'],
+						'login'     => date('Y-m-d H:i:s'),
+						'ipaddress' => $_SERVER['REMOTE_ADDR']
+					);
 
-			$config = array(
-					'user_id' => $user_data['id'],
-					'login'   => date('Y-m-d H:i:s')
-				);
+				$logs_id = $this->logs_model->store($config);
 
-			$logs_id = $this->logs_model->store($config);
+				$user_data['logs_id'] = $logs_id;
 
-			$user_data['logs_id'] = $logs_id;
+				$this->user_model->setState($user_data['id'], 1);
 
-			$this->session->set_userdata($user_data);
+				$this->session->set_userdata($user_data);
 
-			redirect('/login/home');
+				redirect('/login/home');
+			}
+			else
+			{
+				$data['message'] = '<span class="col-sm-12 alert alert-warning">Your account is currently active from the other machine</span>';
+			}
 		}
-
-		$data['message'] = '<span class="col-sm-12 alert alert-warning">You have no rights to access this system.</span>';
+		else
+		{
+			$data['message'] = '<span class="col-sm-12 alert alert-warning">You have no rights to access this system.</span>';
+		}
 
 		$this->load->view('login_view', $data);
 
+	}
+
+	protected function _redirectIfAuthenticated()
+	{
+		if (count($this->session->userdata()) > 3)
+		{
+			redirect('/login/home');
+		}
 	}
 
 	public function home()
@@ -86,6 +108,11 @@ class Login extends CI_Controller {
 			);
 
 		$this->logs_model->store($config);
+
+		if ($this->user_model->checkState($this->session->userdata('id')))
+		{
+			$this->user_model->setState($this->session->userdata('id'), 0);
+		}
 
 		$this->session->sess_destroy();
 
@@ -125,10 +152,8 @@ class Login extends CI_Controller {
 		return true;
 	}
 
-	protected function _user_exist()
+	protected function _user_exist($username, $password)
 	{
-		$this->load->model('user_model', 'user');
-
-		return is_array($this->user->exist()) ? $this->user->exist() : false;
+		return is_array($this->user_model->exist($username, $password)) ? $this->user_model->exist($username, $password) : false;
 	}
 }
