@@ -8,11 +8,11 @@ class User_model extends CI_Model {
 	}
 
 	// Return user credentials
-	public function exist()
+	public function exist($username, $password)
 	{
 		$config = array(
-				'username' => $this->input->post('username'),
-				'password' => $this->input->post('password')
+				'username' => $username,
+				'password' => $password
 			);
 
 		$fields = array(
