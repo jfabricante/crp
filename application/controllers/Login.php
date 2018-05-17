@@ -54,12 +54,25 @@ class Login extends CI_Controller {
 	{
 		$this->load->model('docs_model');
 
-		$data = array(
-			'title'     => 'Home',
-			'content'   => 'home_view',
-			'entities'  => $this->docs_model->fetchRecentDocs(),
-			'sub_menus' => $this->category_model->browse(array('type' => 'array'))
-		);
+		$data = array();
+
+		if (in_array($this->session->userdata('user_type'), array('Administrator', 'Dealer')))
+		{
+			$data = array(
+				'title'     => 'Home',
+				'content'   => 'home_view',
+				'entities'  => $this->docs_model->fetchRecentDocs(),
+				'sub_menus' => $this->category_model->browse(array('type' => 'array'))
+			);
+		}
+		else
+		{
+			$data = array(
+				'title'     => '',
+				'content'   => 'home2_view',
+				'sub_menus' => $this->category_model->browse(array('type' => 'array'))
+			);
+		}
 
 		$this->load->view('include/template', $data);
 	}
