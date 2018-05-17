@@ -16,6 +16,7 @@ class Login extends CI_Controller {
 		// Load logs model
 		$this->load->model('logs_model');
 		$this->load->model('category_model');
+		$this->load->model('user_model');
 	}
 
 	public function index()
