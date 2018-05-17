@@ -29,7 +29,20 @@
 		<!-- Settings tab content -->
 		<div class="tab-pane" id="control-sidebar-settings-tab">
 			<form method="post">
-				<h3 class="control-sidebar-heading">General Settings</h3>
+			<h3 class="control-sidebar-heading">General Settings</h3>
+
+			<ul class="control-sidebar-menu">
+				<li>
+					<a href="<?php echo base_url('index.php/user/change_password_form') ?>">
+						<i class="menu-icon fa fa-key bg-red"></i>
+
+						<div class="menu-info">
+						<h4 class="control-sidebar-subheading" style="margin-top: 10px;">Change Password</h4>
+
+						</div>
+					</a>
+				</li>
+			</ul>
 			</form>
 		</div><!-- /.tab-pane -->
 
