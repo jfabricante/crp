@@ -105,6 +105,17 @@ class User extends CI_Controller
 		}
 	}
 
+	public function change_password_form()
+	{
+		$data = array(
+				'title'     => 'Change Password',
+				'content'   => 'users/change_password_view',
+				'sub_menus' => $this->category_model->browse(array('type' => 'array'))
+			);
+
+		$this->load->view('include/template', $data);
+	}
+
 	public function showVars($var)
 	{
 		echo '<pre>';
