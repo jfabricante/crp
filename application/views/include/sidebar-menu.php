@@ -56,14 +56,22 @@
 				<ul class="treeview-menu">
 
 					<?php foreach($sub_menus as $menu): ?>
-						<li class="<?php echo $current_menu == ('docs/category_content/' . $menu['id']) ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/docs/category_content/' . $menu['id']) ?>"><i class="fa fa-circle-o"></i><span><?php echo $menu['name'] ?></span></a></li>
+						<?php if (in_array($this->session->userdata('user_type'), array('Vesi')) && $menu['id'] == 11): ?>
+							<li class="<?php echo $current_menu == ('docs/category_content/' . $menu['id']) ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/docs/category_content/' . $menu['id']) ?>"><i class="fa fa-circle-o"></i><span><?php echo $menu['name'] ?></span></a></li>
+						<?php endif ?>
+
+						<?php if (in_array($this->session->userdata('user_type'), array('Administrator', 'Dealer')) && $menu['id'] != 11): ?>
+							<li class="<?php echo $current_menu == ('docs/category_content/' . $menu['id']) ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/docs/category_content/' . $menu['id']) ?>"><i class="fa fa-circle-o"></i><span><?php echo $menu['name'] ?></span></a></li>
+						<?php endif ?>
 					<?php endforeach ?>
 				</ul>
 			</li>
 
-			<li class="<?php echo $current_menu == 'request/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/request/list_') ?>"><i class="fa fa-paper-plane" aria-hidden="true"></i><span>Requests</span></a></li>
+			<?php if (in_array($this->session->userdata('user_type'), array('Administrator', 'Dealer'))): ?>
+				<li class="<?php echo $current_menu == 'request/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/request/list_') ?>"><i class="fa fa-paper-plane" aria-hidden="true"></i><span>Requests</span></a></li>
 
-			<li class="<?php echo $current_menu == 'request/approved_list' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/request/approved_list') ?>"><i class="fa fa-check-circle" aria-hidden="true"></i><span>Approved Requests</span></a></li>
+				<li class="<?php echo $current_menu == 'request/approved_list' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/request/approved_list') ?>"><i class="fa fa-check-circle" aria-hidden="true"></i><span>Approved Requests</span></a></li>
+			<?php endif ?>
 
 			<?php if ($this->session->userdata('user_type') == 'Administrator'): ?>
 				<li class="<?php echo $current_menu == 'branch/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/branch/list_') ?>"><i class="fa fa-share-alt" aria-hidden="true"></i><span>Branches</span></a></li>
@@ -71,7 +79,9 @@
 				<li class="<?php echo $current_menu == 'position/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/position/list_') ?>"><i class="fa fa-sitemap" aria-hidden="true"></i><span>Positions</span></a></li>
 			<?php endif ?>
 
+			<?php if (in_array($this->session->userdata('user_type'), array('Administrator', 'Dealer'))): ?>
 				<li class="<?php echo $current_menu == 'user/list_' ? 'active' : ''; ?>"><a href="<?php echo base_url('index.php/user/list_') ?>"><i class="fa fa-user" aria-hidden="true"></i><span>Users</span></a></li>
+			<?php endif ?>
 
 			<?php if ($this->session->userdata('user_type') == 'Administrator'): ?>
 
