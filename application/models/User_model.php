@@ -45,6 +45,40 @@ class User_model extends CI_Model {
 		return false;
 	}
 
+	/**
+	 * @param
+	 * id int
+	 * status int
+	 */
+	public function setState($id, $status)
+	{
+		$query = $this->db->get_where('login_status_tbl', array('user_id' => $id));
+
+		if ($query->num_rows())
+		{
+			$config = array(
+					'state' => $status
+				);
+
+			$this->db->update('login_status_tbl', $config, array('user_id' => $id));
+		}
+		else
+		{
+			$config = array(
+					'user_id' => $id,
+					'state'   => $status
+				);
+
+			$this->db->insert('login_status_tbl', $config);
+		}
+	}
+
+	// Return true if the user state is active otherwise false
+	public function checkState($id)
+	{
+		return $this->db->get_where('login_status_tbl', array('user_id' => $id, 'state' => 1))->num_rows();
+	}
+
 	public function store_batch(array $data)
 	{
 		$this->db->insert_batch('users_tbl', $data);
@@ -170,5 +204,10 @@ class User_model extends CI_Model {
 	{
 		$this->db->truncate('users_tbl');
 		$this->db->truncate('users_role_tbl');
+	}
+
+	public function updatePassword($params)
+	{
+		$this->db->update('users_tbl', array('password' => $params['password']), array('username' => $params['username'], 'password' => $params['old_password']));
 	}
 }
