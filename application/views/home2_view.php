@@ -23,7 +23,7 @@
 		<div class="gallery">
 			<a href="<?php echo base_url('index.php/NSERIES/N_series'); ?>" target="_blank">
 				<div class="col-md-3 gallery__item">
-					<img class="img-responsive" src="<?php echo base_url('resources/images/gr1_9680-qkr-truck-quarter-left-crop.jpg') ?>" />
+					<img class="img img-responsive" src="<?php echo base_url('resources/images/gr1_9680-qkr-truck-quarter-left-crop.jpg') ?>" />
 					<div class="text-left text-danger gallery__footer">
 						<h4 class="gallery-header">N-SERIES</h4>
 						<p class="gallery-desc">Light-Duty Trucks</p>
@@ -33,7 +33,7 @@
 
 			<a href="<?php echo base_url('index.php/FSERIES/F_series');?>" target="_blank">
 				<div class="col-md-3 gallery__item">
-					<img class="img-responsive" src="<?php echo base_url('resources/images/frr90-live-crop.jpg') ?>" />
+					<img class="img img-responsive" src="<?php echo base_url('resources/images/frr90-live-crop.jpg') ?>" />
 					<div class="text-left text-danger gallery__footer">
 						<h4 class="gallery-header">F-SERIES</h4>
 						<p class="gallery-desc">Medium-Duty Trucks</p>
@@ -43,7 +43,7 @@
 
 			<a href="<?php echo base_url('index.php/VESI/c_series');?>" target="_blank">
 				<div class="col-md-3 gallery__item">
-					<img class="img-responsive" src="<?php echo base_url('resources/images/ceseries-arcwhite-cyz-3-crop.jpg') ?>" />
+					<img class="img img-responsive" src="<?php echo base_url('resources/images/ceseries-arcwhite-cyz-3-crop.jpg') ?>" />
 					<div class="text-left text-danger gallery__footer">
 						<h4 class="gallery-header">C&E Series</h4>
 						<p class="gallery-desc">Heavy-Duty Trucks</p>
@@ -54,7 +54,7 @@
 		<!-- End of col-md-6 -->
 	</div>
 	<!-- End of row -->
-	
+
 	<!-- Spacing between row -->
 	<br>
 
@@ -62,7 +62,7 @@
 	<div class="row text-center">
 		<a href="<?php echo base_url('index.php/USERIES/U_series') ?>" target="_blank">
 			<div class="col-md-3 gallery__item">
-				<img class="img-responsive" src="<?php echo base_url('resources/images/mu-x-red-spinel-crop.jpg') ?>" />
+				<img class="img img-responsive" src="<?php echo base_url('resources/images/mu-x-red-spinel-crop.jpg') ?>" />
 				<div class="text-left text-danger gallery__footer">
 					<h4 class="gallery-header">mu-X</h4>
 					<p class="gallery-desc">Center of Attraction</p>
@@ -72,7 +72,7 @@
 
 		<a href="<?php echo base_url('index.php/TSERIES/T_series'); ?>" target="_blank">
 			<div class="col-md-3 gallery__item">
-				<img class="img-responsive" src="<?php echo base_url('resources/images/dmax-xseries-white-crop.jpg') ?>" />
+				<img class="img img-responsive" src="<?php echo base_url('resources/images/dmax-xseries-white-crop.jpg') ?>" />
 				<div class="text-left text-danger gallery__footer">
 					<h4 class="gallery-header">D-MAX</h4>
 					<p class="gallery-desc">Tough Enough for Anything</p>
