@@ -75,7 +75,7 @@
 							  		<td>UCR/UCS</td>
 							  		<td>
 							  			<a href="<?php echo base_url('index.php/USERIES/U_series') ?>" target="_blank">
-							  					<i class="fa fa-link"></i>	
+							  				<i class="fa fa-link"></i>	
 							  			</a>
 							  		</td>
 							  		<td></td>
@@ -86,8 +86,8 @@
 							  		<td>TFR/TFS</td>
 							  		<td>
 							  			<a href="<?php echo base_url('index.php/TSERIES/T_series'); ?>" target="_blank">
-							  					<i class="fa fa-link"></i>	
-							  				</a>
+							  				<i class="fa fa-link"></i>	
+							  			</a>
 							  		</td>
 							  		<td></td>
 							  </tr>
