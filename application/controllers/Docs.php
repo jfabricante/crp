@@ -40,7 +40,7 @@ class Docs extends CI_Controller
 
 		$data = array(
 				'title'     => 'List of ' . $category['name'],
-				'content'   => 'docs/category_content_view',
+				'content'   => $category_id == 11 ? 'docs/category_link_view' : 'docs/category_content_view',
 				'entities'  => $entities,
 				'sub_menus' => $this->category_model->browse(array('type' => 'array'))
 			);
