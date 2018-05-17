@@ -116,6 +116,30 @@ class User extends CI_Controller
 		$this->load->view('include/template', $data);
 	}
 
+	public function password_store()
+	{
+		$user_data = $this->user_model->exist($this->session->userdata('username'), $this->input->post('old_password'));
+
+		if (is_array($user_data) && ($this->input->post('new_password') === $this->input->post('conf_password')))
+		{
+			$config = array(
+					'username'     => $this->session->userdata('username'),
+					'password'     => $this->input->post('new_password'),
+					'old_password' => $this->input->post('old_password')
+				);
+
+			$this->user_model->updatePassword($config);
+
+			$this->session->set_flashdata('message', '<div class="alert alert-success">Password has been changed.</div>');
+		}
+		else
+		{
+			$this->session->set_flashdata('message', '<div class="alert alert-danger">Either your old password is incorrect or the new password and confimation password does not match!</div>');
+		}
+
+		redirect($this->agent->referrer());
+	}
+
 	public function showVars($var)
 	{
 		echo '<pre>';
